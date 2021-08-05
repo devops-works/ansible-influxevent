@@ -11,6 +11,6 @@
     url: https://gitlab.com/devopsworks/tools/influxevent/-/releases/{{ _latest.stdout_lines.0 }}/downloads/binaries/influxevent-amd64-{{ _latest.stdout_lines.0 }}.gz
     dest: /tmp/influxevent.gz
 
-- name: Fecth & unarchive influxevent
+- name: Fetch & unarchive influxevent
   # can not use unachive, does not support gz
   shell: gunzip -cd /tmp/influxevent.gz > /usr/local/bin/influxevent && chmod 755 /usr/local/bin/influxevent
