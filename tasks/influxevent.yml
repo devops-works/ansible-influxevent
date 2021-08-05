@@ -13,5 +13,4 @@
 
 - name: Fecth & unarchive influxevent
   # can not use unachive, does not support gz
-  shell:
-    src: gunzip -cd /tmp/influxevent.gz > /usr/local/bin/influxevent && chmod 755 /usr/local/bin/influxevent
+  shell: gunzip -cd /tmp/influxevent.gz > /usr/local/bin/influxevent && chmod 755 /usr/local/bin/influxevent
