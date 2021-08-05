@@ -1,0 +1,4 @@
+- include: influxevent.yml
+  tags:
+    - influxevent
+
