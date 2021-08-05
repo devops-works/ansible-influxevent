@@ -1,10 +1,10 @@
 - name: Finds latest influxevent version
   shell: curl -s https://gitlab.com/api/v4/projects/18707017/releases/ | jq '.[]' | jq -r '.name' | head -1
-  register: influxevent_latest
+  register: _latest
 
 - name: Fetches latest version
   get_url:
-    url: https://gitlab.com/devopsworks/tools/influxevent/-/releases/{{ influxevent_latest.stdout }}/downloads/binaries/influxevent-amd64-{{ influxevent_latest.stdout }}.gz
+    url: https://gitlab.com/devopsworks/tools/influxevent/-/releases/{{ _latest.stdout_lines.0 }}/downloads/binaries/influxevent-amd64-{{ _latest.stdout_lines.0 }}.gz
     dest: /tmp/influxevent.gz
 
 - name: Fecth & unarchive influxevent
