@@ -5,7 +5,7 @@
 
 - name: Finds latest influxevent version
   uri:
-    url: https://gitlab.com/api/v4/projects/18707017/releases/latest
+    url: https://gitlab.com/api/v4/projects/18707017/releases
   # | jq '.[]' | jq -r '.name' | head -1
   register: __influxevent_repo_info
 
