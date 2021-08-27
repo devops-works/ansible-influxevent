@@ -5,12 +5,15 @@
 
 - name: Finds latest influxevent version
   uri:
-    url: https://gitlab.com/api/v4/projects/18707017/releases/
+    url: https://gitlab.com/api/v4/projects/18707017/releases/latest
   # | jq '.[]' | jq -r '.name' | head -1
   register: __influxevent_repo_info
 
 - debug:
     var: __influxevent_repo_info
+
+- debug:
+    msg: '{{ __influxevent_repo_info.json.0["name"] }}'
 
 - name: Fetches latest version
   get_url:
