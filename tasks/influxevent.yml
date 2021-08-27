@@ -7,17 +7,16 @@
   uri:
     url: https://gitlab.com/api/v4/projects/18707017/releases
   # | jq '.[]' | jq -r '.name' | head -1
+    status:
+      - 200
   register: __influxevent_repo_info
 
-- debug:
-    var: __influxevent_repo_info
-
-- debug:
-    msg: '{{ __influxevent_repo_info.json.0["name"] }}'
+- set_facts:
+    __influxevent_latest_version: '{{ __influxevent_repo_info.json.0["name"] }}'
 
 - name: Fetches latest version
   get_url:
-    url: https://gitlab.com/devopsworks/tools/influxevent/-/releases/{{ _latest.stdout_lines.0 }}/downloads/binaries/influxevent-amd64-{{ _latest.stdout_lines.0 }}.gz
+    url: https://gitlab.com/devopsworks/tools/influxevent/-/releases/{{ __influxevent_latest_version }}/downloads/binaries/influxevent-amd64-{{ __influxevent_latest_version }}.gz
     dest: /tmp/influxevent.gz
 
 - name: Fetch & unarchive influxevent
