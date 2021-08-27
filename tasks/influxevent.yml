@@ -7,11 +7,11 @@
   uri:
     url: https://gitlab.com/api/v4/projects/18707017/releases
   # | jq '.[]' | jq -r '.name' | head -1
-    status:
+    status_code:
       - 200
   register: __influxevent_repo_info
 
-- set_facts:
+- set_fact:
     __influxevent_latest_version: '{{ __influxevent_repo_info.json.0["name"] }}'
 
 - name: Fetches latest version
