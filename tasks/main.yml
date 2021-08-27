@@ -2,6 +2,8 @@
   stat:
     path: /usr/local/bin/influxevent
   register: __influxevent
+  tags:
+    - influxevent
 
 - include: influxevent.yml
   when: not __influxevent.stat.exists or influxevent_force_install
