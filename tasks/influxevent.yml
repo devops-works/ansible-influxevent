@@ -4,13 +4,15 @@
     status_code:
       - 200
   register: __influxevent_repo_info
+  check_mode: no
 
 - set_fact:
     __influxevent_latest_version: '{{ __influxevent_repo_info.json.0["name"] }}'
+    __influxevent_latest_num_version: '{{ __influxevent_repo_info.json.0["name"] | regex_replace("v","") }}'
 
 - name: Fetches latest version
   get_url:
-    url: https://gitlab.com/devopsworks/tools/influxevent/-/releases/{{ __influxevent_latest_version }}/downloads/binaries/influxevent-amd64-{{ __influxevent_latest_version }}.gz
+    url: https://gitlab.com/api/v4/projects/18707017/packages/generic/influxevent/{{ __influxevent_latest_num_version }}/influxevent-linux-amd64-{{ __influxevent_latest_version }}.gz
     dest: /tmp/influxevent.gz
 
 - name: Fetch & unarchive influxevent
