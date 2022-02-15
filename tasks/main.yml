@@ -5,7 +5,7 @@
   tags:
     - influxevent
 
-- include: influxevent.yml
+- include_tasks: influxevent.yml
   when: not __influxevent.stat.exists or influxevent_force_install
   tags:
     - influxevent
