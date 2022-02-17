@@ -1,3 +1,4 @@
+---
 - name: Checks if influxevent is already present
   stat:
     path: /usr/local/bin/influxevent
@@ -5,8 +6,11 @@
   tags:
     - influxevent
 
-- include_tasks: influxevent.yml
+- include_tasks:
+    file: influxevent.yml
+    apply:
+      tags:
+        - influxevent
   when: not __influxevent.stat.exists or influxevent_force_install
   tags:
-    - influxevent
-
+    - always
