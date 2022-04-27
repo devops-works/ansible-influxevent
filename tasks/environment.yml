@@ -1,0 +1,45 @@
+- name: Sets INFLUX environment in cron
+  vars:
+    __env_vars:
+      - name: INFLUX_MEASUREMENT
+        value: events
+      - name: INFLUX_DB
+        value: "{{ influxevent_influx_database }}"
+      - name: INFLUX_URL
+        value: "{{ influxevent_influx_url }}"
+      - name: INFLUX_USER
+        value: "{{ influxevent_influx_username }}"
+      - name: INFLUX_PASS
+        value: "{{ influxevent_influx_password }}"
+      - name: INFLUX_TAGS
+        value: "{{ influxevent_influx_tags }}"
+  cron:
+    name: "{{ item.name }}"
+    env: yes
+    job: "{{ item.value }}"
+  loop: "{{ __env_vars }}"
+  when: influxevent_cronfiles | length == 0
+
+- name: Sets INFLUX environment in cronfiles
+  vars:
+    __env_vars:
+      - name: INFLUX_MEASUREMENT
+        value: events
+      - name: INFLUX_DB
+        value: "{{ influxevent_influx_database }}"
+      - name: INFLUX_URL
+        value: "{{ influxevent_influx_url }}"
+      - name: INFLUX_USER
+        value: "{{ influxevent_influx_username }}"
+      - name: INFLUX_PASS
+        value: "{{ influxevent_influx_password }}"
+      - name: INFLUX_TAGS
+        value: "{{ influxevent_influx_tags }}"
+  cron:
+    name: "{{ item.0.name }}"
+    env: yes
+    cron_file: "{{ item.1.value }}"
+    job: "{{ item.0.value }}"
+  loop: "{{ __env_vars | product(influxevent_cronfiles) | list }}"
+  when: influxevent_cronfiles | length > 0
+

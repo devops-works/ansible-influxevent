@@ -14,3 +14,12 @@
   when: not __influxevent.stat.exists or influxevent_force_install
   tags:
     - always
+
+- include_tasks:
+    file: environment.yml
+    apply:
+      tags:
+        - influxevent
+  when: not influxevent_skip_environment
+  tags:
+    - always

@@ -1,1 +1,3 @@
 influxevent_force_install: false
+influxevent_cronfiles: []
+influxevent_skip_environment: true
