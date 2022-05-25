@@ -4,7 +4,7 @@
     path: /usr/local/bin/influxevent
   register: __influxevent
   tags:
-    - influxevent
+    - always
 
 - include_tasks:
     file: influxevent.yml
