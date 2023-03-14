@@ -11,7 +11,7 @@
     apply:
       tags:
         - influxevent
-  when: not __influxevent.stat.exists or influxevent_force_install
+  when: __influxevent is defined and (not __influxevent.stat.exists or influxevent_force_install)
   tags:
     - always
 
